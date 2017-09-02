@@ -1,0 +1,15 @@
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace GymLog.Entities {
+    public class Equipment {
+        [Key]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Proszę podać nazwę urządzenia")]
+        [Display(Name = "Nazwa urządzenia")]
+        public string Name { get; set; }
+
+        public virtual ICollection<Exercise> Exercises { get; set; }
+    }
+}
