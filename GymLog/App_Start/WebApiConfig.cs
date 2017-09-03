@@ -2,7 +2,9 @@
 using Newtonsoft.Json.Serialization;
 using System.Linq;
 using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace GymLog {
     public static class WebApiConfig {
@@ -21,15 +23,25 @@ namespace GymLog {
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
-            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
+            //jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             // Add support CORS
-            //var attr = new EnableCorsAttribute("*", "*", "GET");
-            //config.EnableCors(attr);
+            var attr = new EnableCorsAttribute("*", "*", "GET");
+            config.EnableCors(attr);
 
-            var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
-            config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+            //remove xml type
+            //var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
+            //config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+
+            //set json format
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+            var json = config.Formatters.JsonFormatter;
+            json.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+            json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            // configure caching
+            config.MessageHandlers.Add(new CacheCow.Server.CachingHandler(config));
         }
     }
 }

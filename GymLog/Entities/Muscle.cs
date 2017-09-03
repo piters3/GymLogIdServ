@@ -3,6 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GymLog.Entities {
     public class Muscle {
+
+        public Muscle() {
+            Exercises = new List<Exercise>();
+        }
+
         [Key]
         public int Id { get; set; }
 

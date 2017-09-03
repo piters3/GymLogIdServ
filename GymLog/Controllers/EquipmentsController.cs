@@ -5,7 +5,6 @@ using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web.Http;
-using System.Web.Http.Description;
 
 namespace GymLog.Controllers {
     [RoutePrefix("api/equipments")]
@@ -30,22 +29,19 @@ namespace GymLog.Controllers {
         }
 
 
-        [ResponseType(typeof(EquipmentModel))]
         [Route("{id}", Name = "Equipment")]
         public IHttpActionResult Get(int id) {
-            var equipment = _repo.GetEquipments().Select(m =>
-                new MuscleModel() {
-                    Id = m.Id,
-                    Name = m.Name,
-                }).SingleOrDefault(m => m.Id == id);
+            var equipment = _repo.GetEquipment(id);
             if (equipment == null) {
                 return NotFound();
             }
-            return Ok(equipment);
+            return Ok(new EquipmentModel() {
+                Id = equipment.Id,
+                Name = equipment.Name
+            });
         }
 
 
-        [ResponseType(typeof(Equipment))]
         [Route("")]
         public IHttpActionResult Post(Equipment eq) {
             if (!ModelState.IsValid) {
@@ -57,7 +53,6 @@ namespace GymLog.Controllers {
         }
 
 
-        [ResponseType(typeof(void))]
         [Route("{id}")]
         public IHttpActionResult Put(int id, Equipment eq) {
             if (!ModelState.IsValid) {
@@ -66,20 +61,15 @@ namespace GymLog.Controllers {
             if (id != eq.Id) {
                 return BadRequest();
             }
-            _repo.Update(eq);
-            try {
-                _repo.SaveAll();
-            } catch (DbUpdateConcurrencyException) {
-                if (!_repo.EquipmentExist(id)) {
-                    return NotFound();
-                } else {
-                    throw;
-                }
+            if (_repo.GetEquipment(id) == null) {
+                return NotFound();
             }
+            _repo.Update(eq);
+            _repo.SaveAll();
             return Ok(eq);
         }
 
-        [ResponseType(typeof(Equipment))]
+
         [Route("{id}")]
         public IHttpActionResult Delete(int id) {
             Equipment eq = _repo.GetEquipment(id);

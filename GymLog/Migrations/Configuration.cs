@@ -54,6 +54,11 @@ namespace GymLog.Migrations {
                 new Equipment() { Id = 5, Name = "Sztanga prosta" },
                 new Equipment() { Id = 6, Name = "Sztanga giêta" }
                 );
+            context.Exercises.AddOrUpdate(x => x.Id,
+                new Exercise() { Id = 1, Name = "Wyciskanie sztangi le¿¹c", Description = "Bla bla bla", EquipmentId = 1, MuscleId = 1 },
+                new Exercise() { Id = 1, Name = "Przysiady", Description = "Bla bla bla", EquipmentId = 2, MuscleId = 3 },
+                new Exercise() { Id = 1, Name = "Podci¹ganie", Description = "Bla bla bla", EquipmentId = 3, MuscleId = 3 }
+                );
         }
 
     }

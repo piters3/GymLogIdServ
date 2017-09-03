@@ -4,7 +4,6 @@ using GymLog.Models;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web.Http;
-using System.Web.Http.Description;
 
 namespace GymLog.Controllers {
     [RoutePrefix("api/muscles")]
@@ -28,22 +27,19 @@ namespace GymLog.Controllers {
         }
 
 
-        [ResponseType(typeof(MuscleModel))]
         [Route("{id}", Name = "Muscle")]
         public IHttpActionResult Get(int id) {
-            var muscle = _repo.GetMuscles().Select(m =>
-                new MuscleModel() {
-                    Id = m.Id,
-                    Name = m.Name,
-                }).SingleOrDefault(m => m.Id == id);
+            var muscle = _repo.GetMuscle(id);
             if (muscle == null) {
                 return NotFound();
             }
-            return Ok(muscle);
+            return Ok(new MuscleModel() {
+                Id = muscle.Id,
+                Name = muscle.Name
+            });
         }
 
 
-        [ResponseType(typeof(Muscle))]
         [Route("")]
         public IHttpActionResult Post(Muscle muscle) {
             if (!ModelState.IsValid) {
@@ -55,7 +51,6 @@ namespace GymLog.Controllers {
         }
 
 
-        [ResponseType(typeof(void))]
         [Route("{id}")]
         public IHttpActionResult Put(int id, Muscle muscle) {
             if (!ModelState.IsValid) {
@@ -64,21 +59,15 @@ namespace GymLog.Controllers {
             if (id != muscle.Id) {
                 return BadRequest();
             }
-            _repo.Update(muscle);
-            try {
-                _repo.SaveAll();
-            } catch (DbUpdateConcurrencyException) {
-                if (!_repo.MuscleExist(id)) {
-                    return NotFound();
-                } else {
-                    throw;
-                }
+            if (_repo.GetMuscle(id) == null) {
+                return NotFound();
             }
+            _repo.Update(muscle);
+            _repo.SaveAll();
             return Ok(muscle);
         }
 
 
-        [ResponseType(typeof(Muscle))]
         [Route("{id}")]
         public IHttpActionResult Delete(int id) {
             Muscle muscle = _repo.GetMuscle(id);

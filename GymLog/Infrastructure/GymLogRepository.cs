@@ -1,6 +1,7 @@
 ﻿using GymLog.Entities;
 using System.Data.Entity;
 using System.Linq;
+using System;
 
 namespace GymLog.Infrastructure {
     public class GymLogRepository : IGymLogRepository {
@@ -31,8 +32,15 @@ namespace GymLog.Infrastructure {
             _ctx.Muscles.Add(muscle);
         }
 
-        public void Update(Muscle muscle) {
+        public bool Update(Muscle muscle) {
+            var existing = _ctx.Muscles.FirstOrDefault(m => m.Id == muscle.Id);
+            if (existing == null) {
+                return false;
+            }
+            _ctx.Entry(existing).State = EntityState.Detached;
+            _ctx.Muscles.Attach(muscle);
             _ctx.Entry(muscle).State = EntityState.Modified;
+            return true;
         }
 
         public void Delete(Muscle muscle) {
@@ -55,12 +63,50 @@ namespace GymLog.Infrastructure {
             _ctx.Equipments.Add(eq);
         }
 
-        public void Update(Equipment eq) {
+        public bool Update(Equipment eq) {
+            var existing = _ctx.Equipments.FirstOrDefault(e => e.Id == eq.Id);
+            if (existing == null) {
+                return false;
+            }
+            _ctx.Entry(existing).State = EntityState.Detached;
+            _ctx.Equipments.Attach(eq);
             _ctx.Entry(eq).State = EntityState.Modified;
+            return true;
         }
 
         public void Delete(Equipment eq) {
             _ctx.Equipments.Remove(eq);
+        }
+
+        public IQueryable<Exercise> GetExercises() {
+            return _ctx.Exercises;
+        }
+
+        public IQueryable<Exercise> GetExercisesWithExtras() {
+            return _ctx.Exercises.Include("Muscles").Include("Equipments");
+        }
+
+        public void Insert(Exercise ex) {
+            _ctx.Exercises.Add(ex);
+        }
+
+        public Exercise GetExercise(int id) {
+            return _ctx.Exercises.Where(e => e.Id == id).FirstOrDefault();
+        }
+
+        public bool Update(Exercise ex) {
+            var existing = _ctx.Exercises.FirstOrDefault(e => e.Id == ex.Id);
+            if (existing == null) {
+                return false;
+            }
+            _ctx.Entry(existing).State = EntityState.Detached;
+            _ctx.Exercises.Attach(ex);
+            _ctx.Entry(ex).State = EntityState.Modified;
+            return true;
+        }
+
+        public void Delete(Exercise ex) {
+            _ctx.Exercises.Remove(ex);
         }
     }
 }
