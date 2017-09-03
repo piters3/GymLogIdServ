@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using GymLog.Entities;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -9,5 +11,9 @@ namespace GymLog.Models {
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
             return userIdentity;
         }
+
+        public virtual ICollection<Daylog> Daylogs { get; set; }
+
+        public virtual ICollection<Workout> Workouts { get; set; }
     }
 }

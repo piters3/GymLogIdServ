@@ -12,7 +12,7 @@ namespace GymLog.Entities {
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Proszę podać nazwę mięśnia")]
-        [Display(Name = "Nazwa mięnia")]
+        [Display(Name = "Nazwa mięśnia")]
         public string Name { get; set; }
 
         public virtual ICollection<Exercise> Exercises { get; set; }
