@@ -12,8 +12,12 @@ namespace GymLog.Models {
             return userIdentity;
         }
 
-        public virtual ICollection<Daylog> Daylogs { get; set; }
+        public ApplicationUser() {
+            Workouts = new List<Workout>();
+            Daylogs = new List<Daylog>();
+        }
 
+        public virtual ICollection<Daylog> Daylogs { get; set; }
         public virtual ICollection<Workout> Workouts { get; set; }
     }
 }

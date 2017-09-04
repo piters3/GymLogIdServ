@@ -9,9 +9,11 @@ namespace GymLog.Infrastructure {
             : base("DefaultConnection", throwIfV1Schema: false) {
         }
 
-        public DbSet<Muscle> Muscles { get; set; }
+        public DbSet<Daylog> Daylogs { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<Muscle> Muscles { get; set; }
+        public DbSet<Workout> Workouts { get; set; }
 
         public static GymLogContext Create() {
             return new GymLogContext();

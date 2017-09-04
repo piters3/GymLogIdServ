@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GymLog.Entities {
     public class Muscle {
@@ -8,11 +8,7 @@ namespace GymLog.Entities {
             Exercises = new List<Exercise>();
         }
 
-        [Key]
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Proszę podać nazwę mięśnia")]
-        [Display(Name = "Nazwa mięśnia")]
         public string Name { get; set; }
 
         public virtual ICollection<Exercise> Exercises { get; set; }
