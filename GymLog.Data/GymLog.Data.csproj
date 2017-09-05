@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D6CFFF7E-26E3-4022-986F-123605818E88}</ProjectGuid>
+    <ProjectGuid>{645973A9-1050-44EA-A2FB-D2A28C200229}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GymLog.Data</RootNamespace>
@@ -54,12 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\ApplicationUser.cs" />
-    <Compile Include="GymLogContext.cs" />
     <Compile Include="Entities\Daylog.cs" />
     <Compile Include="Entities\Equipment.cs" />
     <Compile Include="Entities\Exercise.cs" />
     <Compile Include="Entities\Muscle.cs" />
     <Compile Include="Entities\Workout.cs" />
+    <Compile Include="GymLogContext.cs" />
     <Compile Include="GymLogRepository.cs" />
     <Compile Include="IGymLogRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />

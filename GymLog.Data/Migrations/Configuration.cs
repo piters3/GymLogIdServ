@@ -17,12 +17,12 @@ namespace GymLog.Data.Migrations {
 
         protected override void Seed(GymLogContext context) {
 
-               /* context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Daylogs]");
-                context.Database.ExecuteSqlCommand("TRUNCATE TABLE [DaylogWorkouts]");
-                context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Equipments]");
-                context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Exercises]");
-                context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Muscles]");
-                context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Workouts]");*/
+            /* context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Daylogs]");
+             context.Database.ExecuteSqlCommand("TRUNCATE TABLE [DaylogWorkouts]");
+             context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Equipments]");
+             context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Exercises]");
+             context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Muscles]");
+             context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Workouts]");*/
 
             if (!context.Roles.Any(r => r.Name == "Admin")) {
                 var store = new RoleStore<IdentityRole>(context);
