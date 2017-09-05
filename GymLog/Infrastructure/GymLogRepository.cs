@@ -4,7 +4,7 @@ using System.Linq;
 using System;
 
 namespace GymLog.Infrastructure {
-    public class GymLogRepository : IGymLogRepository {
+    public class GymLogRepository : IGymLogRepository, IDisposable {
 
         private GymLogContext _ctx;
 
@@ -107,6 +107,20 @@ namespace GymLog.Infrastructure {
 
         public void Delete(Exercise ex) {
             _ctx.Exercises.Remove(ex);
+        }
+
+        protected void Dispose(bool disposing) {
+            if (disposing) {
+                if (_ctx != null) {
+                    _ctx.Dispose();
+                    _ctx = null;
+                }
+            }
+        }
+
+        public void Dispose() {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
