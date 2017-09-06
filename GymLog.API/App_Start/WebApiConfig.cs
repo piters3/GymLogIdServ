@@ -24,8 +24,9 @@ namespace GymLog {
             //jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             // Add support CORS
-            var attr = new EnableCorsAttribute("*", "*", "GET");
+            var attr = new EnableCorsAttribute("*", "*", "*") { SupportsCredentials = true };
             config.EnableCors(attr);
+
 
             //remove xml type
             //var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
