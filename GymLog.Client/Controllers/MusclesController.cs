@@ -12,7 +12,7 @@ namespace GymLog.Client.Controllers {
     {
         HttpClient client;
 
-        string url = "https://localhost:44390/api/muscles";
+        string url = "http://localhost:62238/api/muscles";
 
 
         public MusclesController() {

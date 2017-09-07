@@ -1,18 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using IdentityServer3.AccessTokenValidation;
 using Microsoft.Owin;
 using Owin;
+using System.Web.Http;
 
-[assembly: OwinStartup(typeof(GymLog.Startup))]
+[assembly: OwinStartup(typeof(GymLog.API.Startup))]
 
-namespace GymLog
-{
-    public partial class Startup
-    {
-        public void Configuration(IAppBuilder app)
-        {
-            ConfigureAuth(app);
+namespace GymLog.API {
+    public class Startup {
+        public void Configuration(IAppBuilder app) {
+
+            app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions {
+                Authority = "https://localhost:44321/identity",
+                RequiredScopes = new[] { "GymLogApi" }
+            });
+
+            var config = new HttpConfiguration();
+            config.MapHttpAttributeRoutes();
+
+            app.UseWebApi(config);
         }
     }
 }
