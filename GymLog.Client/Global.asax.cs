@@ -10,6 +10,7 @@ namespace GymLog.Client {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalFilters.Filters.Add(new RequireHttpsAttribute());
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using GymLog.IdSrv.Config;
 using IdentityServer3.Core.Configuration;
-using IdentityServer3.Core.Models;
 using Owin;
 using System;
 using System.Security.Cryptography.X509Certificates;
@@ -10,13 +9,14 @@ namespace GymLog.IdSrv {
         public void Configuration(IAppBuilder app) {
             app.Map("/identity", idsrvApp => {
                 idsrvApp.UseIdentityServer(new IdentityServerOptions {
-                    SiteName = "Embedded IdentityServer",
+                    SiteName = "IdentityServer",
                     SigningCertificate = LoadCertificate(),
+                    //IssuerUri = GymLogConstants.IdSrv,
 
                     Factory = new IdentityServerServiceFactory()
                                 .UseInMemoryUsers(Users.Get())
                                 .UseInMemoryClients(Clients.Get())
-                                .UseInMemoryScopes(StandardScopes.All)
+                                .UseInMemoryScopes(Scopes.Get())
                 });
             });
         }

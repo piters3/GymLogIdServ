@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymLog.IdSrv", "GymLog.IdSr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymLog.API", "GymLog.API\GymLog.API.csproj", "{DFBBCE82-0F16-4695-B0E3-4C7055D000FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymLog.Constants", "GymLog.Constants\GymLog.Constants.csproj", "{1CA2DC11-6F06-4A2C-816A-19E7B81DCE6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DFBBCE82-0F16-4695-B0E3-4C7055D000FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFBBCE82-0F16-4695-B0E3-4C7055D000FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFBBCE82-0F16-4695-B0E3-4C7055D000FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CA2DC11-6F06-4A2C-816A-19E7B81DCE6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CA2DC11-6F06-4A2C-816A-19E7B81DCE6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CA2DC11-6F06-4A2C-816A-19E7B81DCE6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CA2DC11-6F06-4A2C-816A-19E7B81DCE6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

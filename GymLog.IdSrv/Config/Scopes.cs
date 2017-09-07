@@ -7,6 +7,16 @@ namespace GymLog.IdSrv.Config {
         public static IEnumerable<Scope> Get() {
             var scopes = new List<Scope>
             {
+                new Scope
+            {
+                Enabled = true,
+                Name = "roles",
+                Type=ScopeType.Identity,
+                Claims = new List<ScopeClaim> 
+                {
+                    new ScopeClaim("role")
+                }
+            },
             new Scope
             {
                 Enabled = true,
@@ -15,7 +25,7 @@ namespace GymLog.IdSrv.Config {
                 Description = "Access to a GymLog API",
                 Type = ScopeType.Resource
             }
-        };
+            };
 
             scopes.AddRange(StandardScopes.All);
 

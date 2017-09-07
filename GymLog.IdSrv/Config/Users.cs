@@ -1,10 +1,8 @@
 ﻿using IdentityServer3.Core;
 using IdentityServer3.Core.Services.InMemory;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Web;
+
 
 namespace GymLog.IdSrv.Config {
     public static class Users {
@@ -14,13 +12,15 @@ namespace GymLog.IdSrv.Config {
             new InMemoryUser
             {
                 Username = "bob",
-                Password = "password",
-                Subject = "bob",
+                Password = "secret",
+                Subject = "1",
 
                 Claims = new[]
                 {
                     new Claim(Constants.ClaimTypes.GivenName, "Bob"),
-                    new Claim(Constants.ClaimTypes.FamilyName, "Smith")
+                    new Claim(Constants.ClaimTypes.FamilyName, "Smith"),
+                    new Claim(Constants.ClaimTypes.Role, "WebReadUser"),
+                    new Claim(Constants.ClaimTypes.Role, "WebWriteUser")
                 }
             }
         };

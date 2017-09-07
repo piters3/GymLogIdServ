@@ -6,38 +6,35 @@ namespace GymLog.IdSrv.Config {
         public static IEnumerable<Client> Get() {
             return new[]
             {
+            new Client
+            {
+                Enabled = true,
+                ClientName = "MVC Client",
+                ClientId = "MVCClient",
+                Flow = Flows.Implicit,
+
+                RedirectUris = new List<string>
+                {
+                    GymLogConstants.MVCClient
+                },
+
+                AllowAccessToAllScopes = true
+            },
             //new Client
             //{
-            //    ClientId = "socialnetwork",
+            //    ClientName = "MVC Client (service communication)",
+            //    ClientId = "mvc_service",
+            //    Flow = Flows.ClientCredentials,
+
             //    ClientSecrets = new List<Secret>
             //    {
             //        new Secret("secret".Sha256())
             //    },
-            //    ClientName = "SocialNetwork",
-            //    Flow = Flows.ResourceOwner,
-            //    RedirectUris = new List<string>
+            //    AllowedScopes = new List<string>
             //    {
-            //        "https://localhost:44319/"
-            //    },
-
-            //    AllowAccessToAllScopes = true,
-            //    Enabled = true,
-            //},
-            new Client
-            {
-                ClientName = "MVC Client (service communication)",
-                ClientId = "mvc_service",
-                Flow = Flows.ClientCredentials,
-
-                ClientSecrets = new List<Secret>
-                {
-                    new Secret("secret".Sha256())
-                },
-                AllowedScopes = new List<string>
-                {
-                    "GymLogAPI"
-                }
-            }
+            //        "GymLogAPI"
+            //    }
+            //}
         };
         }
     }
