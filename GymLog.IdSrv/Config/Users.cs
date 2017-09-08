@@ -12,15 +12,15 @@ namespace GymLog.IdSrv.Config {
             new InMemoryUser
             {
                 Username = "bob",
-                Password = "secret",
+                Password = "bob",
                 Subject = "1",
 
                 Claims = new[]
                 {
                     new Claim(Constants.ClaimTypes.GivenName, "Bob"),
-                    new Claim(Constants.ClaimTypes.FamilyName, "Smith"),
+                    new Claim(Constants.ClaimTypes.Email, "Smith@qwe.com"),
                     new Claim(Constants.ClaimTypes.Role, "WebReadUser"),
-                    new Claim(Constants.ClaimTypes.Role, "WebWriteUser")
+                    //new Claim(Constants.ClaimTypes.Role, "WebWriteUser")
                 }
             }
         };

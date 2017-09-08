@@ -10,7 +10,7 @@ namespace GymLog.API {
         public void Configuration(IAppBuilder app) {
 
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions {
-                Authority = "https://localhost:44321/identity",
+                Authority = GymLogConstants.IdSrv,
                 RequiredScopes = new[] { "GymLogApi" }
             });
 

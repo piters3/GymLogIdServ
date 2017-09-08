@@ -25,11 +25,16 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
-                        <li class="@Html.IsActive("Index", "PanelAdmin")">@Html.ActionLink("Panel administratora", "Index", "PanelAdmin")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("UpdateContact", "UpdateContact", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (User.Identity.IsAuthenticated) {
+                        <li>@Html.ActionLink("Call API (Client)", "ClientCredentials", "CallApi")</li>
+                        <li>@Html.ActionLink("Call API (User)", "UserCredentials", "CallApi")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
                     }
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @*@Html.Partial("_LoginPartial")*@
             </div>
         </div>
     </nav>
