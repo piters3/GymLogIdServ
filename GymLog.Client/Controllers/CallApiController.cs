@@ -30,7 +30,7 @@ namespace GymLog.Client.Controllers {
 
         private async Task<string> CallApi(string token) {
             var client = new HttpClient();
-            client.SetBearerToken(token);
+            //client.SetBearerToken(token);
 
             var json = await client.GetStringAsync("https://localhost:44321/identity");
              json.ToString();

@@ -6,6 +6,9 @@ namespace GymLog.IdSrv.Config {
         public static IEnumerable<Scope> Get() {
             var scopes = new List<Scope>
             {
+                StandardScopes.OpenId,
+                StandardScopes.Profile,
+                StandardScopes.OfflineAccess,
                 new Scope
                 {
                     Enabled = true,
@@ -26,7 +29,7 @@ namespace GymLog.IdSrv.Config {
                 }
             };
 
-            scopes.AddRange(StandardScopes.All);
+            //scopes.AddRange(StandardScopes.All);
 
             return scopes;
         }
