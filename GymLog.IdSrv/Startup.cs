@@ -1,29 +1,43 @@
-﻿using GymLog.IdSrv.Config;
+﻿using IdentityManager.Configuration;
 using IdentityServer3.Core.Configuration;
 using Owin;
 using System;
 using System.Security.Cryptography.X509Certificates;
+using WebHost.IdMgr;
+using WebHost.IdSvr;
 
 namespace GymLog.IdSrv {
     public class Startup {
         public void Configuration(IAppBuilder app) {
-            app.Map("/identity", idsrvApp => {
-                idsrvApp.UseIdentityServer(new IdentityServerOptions {
-                    SiteName = "IdentityServer",
-                    SigningCertificate = LoadCertificate(),
-                    //IssuerUri = GymLogConstants.IdSrv,
 
-                    Factory = new IdentityServerServiceFactory()
-                                .UseInMemoryUsers(Users.Get())
-                                .UseInMemoryClients(Clients.Get())
-                                .UseInMemoryScopes(Scopes.Get())
+            app.Map("/admin", adminApp => {
+                var factory = new IdentityManagerServiceFactory();
+                factory.ConfigureSimpleIdentityManagerService("AspId");
+                //factory.ConfigureCustomIdentityManagerServiceWithIntKeys("AspId_CustomPK");
+
+                adminApp.UseIdentityManager(new IdentityManagerOptions() {
+                    Factory = factory
                 });
+            });
+
+            app.Map("/identity", core => {
+                var idSvrFactory = Factory.Configure();
+                idSvrFactory.ConfigureUserService("AspId");
+                //idSvrFactory.ConfigureCustomUserService("AspId_CustomPK");
+
+                var options = new IdentityServerOptions {
+                    SiteName = "IdentityServer3",
+                    SigningCertificate = LoadCertificate(),
+                    Factory = idSvrFactory
+                };
+
+                core.UseIdentityServer(options);
             });
         }
 
         X509Certificate2 LoadCertificate() {
             return new X509Certificate2(
-                string.Format(@"{0}\bin\identityServer\idsrv3test.pfx", AppDomain.CurrentDomain.BaseDirectory), "idsrv3test");
+                string.Format(@"{0}\IdSvr\Certificate\idsrv3test.pfx", AppDomain.CurrentDomain.BaseDirectory), "idsrv3test");
         }
 
     }
