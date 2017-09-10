@@ -15,7 +15,7 @@ namespace GymLog.Data.Entities {
         public string UserId { get; set; }
         public int ExerciseId { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public virtual User User { get; set; }
         public virtual Exercise Exercise { get; set; }
         public virtual ICollection<Daylog> Daylogs { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using GymLog.IdSrv.AspId;
+﻿using GymLog.Data;
+using GymLog.Data.Entities;
 using IdentityServer3.AspNetIdentity;
 using IdentityServer3.Core.Configuration;
 using IdentityServer3.Core.Services;
@@ -13,7 +14,7 @@ namespace GymLog.IdSrv.IdSrv {
             factory.UserService = new Registration<IUserService, UserService>();
             factory.Register(new Registration<UserManager>());
             factory.Register(new Registration<UserStore>());
-            factory.Register(new Registration<Context>(resolver => new Context(connString)));
+            factory.Register(new Registration<GymLogContext>(resolver => new GymLogContext()));
         }
     }
 

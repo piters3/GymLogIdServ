@@ -1,26 +1,36 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using IdSvr3 = IdentityServer3.Core;
 
-namespace GymLog.IdSrv.AspId {
+namespace GymLog.Data.Entities {
 
     public class User : IdentityUser {
+        public User() {
+            Workouts = new List<Workout>();
+            Daylogs = new List<Daylog>();
+        }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public virtual ICollection<Daylog> Daylogs { get; set; }
+        public virtual ICollection<Workout> Workouts { get; set; }
+
+
     }
 
     public class Role : IdentityRole { }
 
-    public class Context : IdentityDbContext<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim> {
-        public Context(string connString)
-            : base(connString) {
-        }
-    }
+    //public class Context : IdentityDbContext<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim> {
+    //    public Context(string connString)
+    //        : base(connString) {
+    //    }
+    //}
 
     public class UserStore : UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim> {
-        public UserStore(Context ctx)
+        public UserStore(GymLogContext ctx)
             : base(ctx) {
         }
     }
@@ -52,7 +62,7 @@ namespace GymLog.IdSrv.AspId {
     }
 
     public class RoleStore : RoleStore<Role> {
-        public RoleStore(Context ctx)
+        public RoleStore(GymLogContext ctx)
             : base(ctx) {
         }
     }

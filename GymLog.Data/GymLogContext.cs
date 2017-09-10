@@ -4,9 +4,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GymLog.Data
 {
-    public class GymLogContext : IdentityDbContext<ApplicationUser> {
+    public class GymLogContext : IdentityDbContext<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim> {
         public GymLogContext()
-            : base("DefaultConnection", throwIfV1Schema: false) {
+            : base("GymlogDB") {
         }
 
         public DbSet<Daylog> Daylogs { get; set; }

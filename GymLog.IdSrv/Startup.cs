@@ -13,8 +13,7 @@ namespace GymLog.IdSrv {
 
             app.Map("/admin", adminApp => {
                 var factory = new IdentityManagerServiceFactory();
-                factory.ConfigureSimpleIdentityManagerService("AspId");
-                //factory.ConfigureCustomIdentityManagerServiceWithIntKeys("AspId_CustomPK");
+                factory.ConfigureSimpleIdentityManagerService("GymlogDB");
 
                 adminApp.UseIdentityManager(new IdentityManagerOptions() {
                     Factory = factory
@@ -23,8 +22,7 @@ namespace GymLog.IdSrv {
 
             app.Map("/identity", core => {
                 var idSvrFactory = Factory.Configure();
-                idSvrFactory.ConfigureUserService("AspId");
-                //idSvrFactory.ConfigureCustomUserService("AspId_CustomPK");
+                idSvrFactory.ConfigureUserService("GymlogDB");
 
                 var options = new IdentityServerOptions {
                     SiteName = "IdentityServer3",

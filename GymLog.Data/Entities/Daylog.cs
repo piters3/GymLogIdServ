@@ -13,7 +13,7 @@ namespace GymLog.Data.Entities {
 
         public string UserId { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public virtual User User { get; set; }
         public virtual ICollection<Workout> Workouts { get; set; }
     }
 }

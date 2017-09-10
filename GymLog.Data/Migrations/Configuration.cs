@@ -24,7 +24,7 @@ namespace GymLog.Data.Migrations {
              context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Muscles]");
              context.Database.ExecuteSqlCommand("TRUNCATE TABLE [Workouts]");*/
 
-            if (!context.Roles.Any(r => r.Name == "Admin")) {
+     /*       if (!context.Roles.Any(r => r.Name == "Admin")) {
                 var store = new RoleStore<IdentityRole>(context);
                 var manager = new RoleManager<IdentityRole>(store);
                 var role = new IdentityRole { Name = "Admin" };
@@ -33,13 +33,13 @@ namespace GymLog.Data.Migrations {
             }
 
             if (!context.Users.Any(u => u.UserName == "administrator")) {
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "administrator" };
+                var store = new UserStore<User>(context);
+                var manager = new UserManager<User>(store);
+                var user = new User { UserName = "administrator" };
 
                 manager.Create(user, "password!");
                 manager.AddToRole(user.Id, "Admin");
-            }
+            }*/
 
 
 
@@ -75,7 +75,7 @@ namespace GymLog.Data.Migrations {
 
 
 
-            var exercises = new List<Exercise> {
+       /*     var exercises = new List<Exercise> {
                 new Exercise() { Name = "Wyciskanie sztangi le¿¹c", Description = "Bla bla bla", Muscle = muscles.Single(m=>m.Name=="Klatka piersiowa"), Equipment = equipments.Single(m=>m.Name=="£awka prosta")},
                 new Exercise() { Name = "Przysiady", Description = "Bla bla bla", Muscle = muscles.Single(m=>m.Name=="Udo"), Equipment = equipments.Single(m=>m.Name=="Suwnica")},
                 new Exercise() { Name = "Podci¹ganie", Description = "Bla bla bla", Muscle = muscles.Single(m=>m.Name=="Plecy"), Equipment = equipments.Single(m=>m.Name=="Dr¹¿ek")},
@@ -121,7 +121,7 @@ namespace GymLog.Data.Migrations {
             AddOrUpdateDayLog(context, workoutList[3].Id, daylogList[1].Id);
 
             context.SaveChanges();
-
+            */
 
         }
 
