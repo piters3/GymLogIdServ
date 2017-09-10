@@ -1,10 +1,11 @@
-﻿using IdentityManager.Configuration;
+﻿using GymLog.IdSrv.IdMgr;
+using GymLog.IdSrv.IdSrv;
+using IdentityManager.Configuration;
 using IdentityServer3.Core.Configuration;
 using Owin;
 using System;
 using System.Security.Cryptography.X509Certificates;
-using WebHost.IdMgr;
-using WebHost.IdSvr;
+
 
 namespace GymLog.IdSrv {
     public class Startup {
@@ -37,7 +38,7 @@ namespace GymLog.IdSrv {
 
         X509Certificate2 LoadCertificate() {
             return new X509Certificate2(
-                string.Format(@"{0}\IdSvr\Certificate\idsrv3test.pfx", AppDomain.CurrentDomain.BaseDirectory), "idsrv3test");
+                string.Format(@"{0}\IdSrv\Certificate\idsrv3test.pfx", AppDomain.CurrentDomain.BaseDirectory), "idsrv3test");
         }
 
     }

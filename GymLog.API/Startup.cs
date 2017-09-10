@@ -16,8 +16,8 @@ namespace GymLog.API {
 
             var config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
-
-            app.UseWebApi(config);
+            //app.UseNinjectMiddleware(CreateKernel).UseNinjectWebApi(webApiConfiguration);
+            //app.UseWebApi(config);
         }
     }
 }
