@@ -14,7 +14,7 @@ namespace GymLog.API.Controllers {
             _repo = repo;
         }
 
-
+        //[Authorize]
         [Route("", Name = "Muscles")]
         public IQueryable<MuscleModel> Get() {
             var muscles = _repo.GetMuscles().Select(m =>

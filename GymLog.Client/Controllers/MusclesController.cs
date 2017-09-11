@@ -1,18 +1,16 @@
-﻿using GymLog.Client.Models;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+
 
 namespace GymLog.Client.Controllers {
     public class MusclesController : Controller
     {
-        HttpClient client;
+      /*  HttpClient client;
 
-        string url = "http://localhost:62238/api/muscles";
+        string url = GymLogConstants.API + "api/muscles";
 
 
         public MusclesController() {
@@ -21,9 +19,9 @@ namespace GymLog.Client.Controllers {
             };
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
+        }*/
 
-        public async Task<ActionResult> Index() {
+     /*   public async Task<ActionResult> Index() {
             HttpResponseMessage responseMessage = await client.GetAsync(url);
             if (responseMessage.IsSuccessStatusCode) {
                 var responseData = responseMessage.Content.ReadAsStringAsync().Result;
@@ -33,6 +31,18 @@ namespace GymLog.Client.Controllers {
                 return View(muscles);
             }
             return Content("An error occurred.");
-        }
+        }*/
+
+      /*  private async Task<String> Index() {
+            var user = User as ClaimsPrincipal;
+            var token = user.FindFirst("access_token").Value;
+
+            var client = new HttpClient();
+            client.SetBearerToken(token);
+
+            HttpResponseMessage response = await client.GetAsync(GymLogConstants.API+ "api/muscles");
+
+            return await response.Content.ReadAsStringAsync();
+        }*/
     }
 }
